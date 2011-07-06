@@ -1,12 +1,14 @@
 /* Colours */
 
+$main_text_colour: #000000;
+
 /* Standard formatting styles */
 
 body {
   font-size: "13px/1.5";
   font-family: Verdana, Geneva, sans-serif;
   
-  color: #000000;
+  color: $main_text_colour;
 }
   
 a:focus {
