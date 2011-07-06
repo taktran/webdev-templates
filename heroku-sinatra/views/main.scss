@@ -1,0 +1,43 @@
+/*
+  Website styles
+*/
+@import "reset";
+@import "960grid";
+@import "helper";
+@import "formatting";
+
+body {
+
+} // body
+
+#wrapper {
+
+} // #wrapper
+
+#header {
+
+} // #header
+
+#navigation {
+
+} // #navigation
+
+
+#body_content {
+  @include ninesixty_grid_container;
+  clear: both;
+  padding-bottom: 60px;
+  
+} // #body_content
+
+/* Page specific files */
+.homepage {
+  #body_content {
+    
+  } // .homepage #body_content
+} // .homepage
+
+#footer {
+  clear: both;
+
+} // #footer

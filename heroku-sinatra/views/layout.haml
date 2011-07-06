@@ -1,0 +1,42 @@
+!!! Strict
+%html
+  %head
+    %title Some heroku sinatra site
+    / Content Types
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "text/css; charset=utf-8", "http-equiv" => "content-style-type"}/
+    %meta{:content => "text/javascript; charset=utf-8", "http-equiv" => "content-script-type"}/
+    %link{:href => "/stylesheets/main.css", :media => "all", :rel => "stylesheet", :type => "text/css"}/
+    :plain
+      <!--[if IE 7]>
+            <link rel="stylesheet" type="text/css" href="/stylesheets/ie7.css">
+      <![endif]-->
+      
+    %script{:type =>"text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"}
+    %script{:type =>"text/javascript", :src => "/javascripts/sevenup.0.3.min.js"}
+    %script{:type =>"text/javascript", :src => "/javascripts/sevenup_black.0.3.min.js"}
+    %script{:type =>"text/javascript", :src => "/javascripts/application.js"}
+
+  %body{ :class => (request.path_info == "/") ? "homepage" : request.path_info.gsub(/\//, '') + "_page" }
+    #wrapper
+      #header
+        .inner
+          %h1.title 
+            %a{:href => "/"} Some heroku sinatra site
+          - menu_items = [{"/" => "Home"}, {"/about" => "About"}]
+
+          %ol#navigation
+            - menu_items.each_with_index do |menu_item, index|
+              - url = menu_item.keys[0]
+              - css_class = (url == request.path_info) ? "current" : ""
+              - css_class += " first" if (index == 0)
+              - css_class += " last" if (index == (menu_items.size - 1))
+              %li{:class => css_class}
+                %a{:href => url}= menu_item[url]
+
+      #body_content.clearfix
+        = yield
+      
+      #footer.clearfix
+        Footer stuff
+          

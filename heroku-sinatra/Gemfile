@@ -1,0 +1,10 @@
+source 'http://rubygems.org'
+
+gem 'sinatra', '1.2.6'
+gem 'thin', '1.2.11'
+
+gem 'haml'
+gem 'sass'
+
+# For auto-reloading (http://www.sinatrarb.com/faq.html#reloading)
+gem 'shotgun'

@@ -1,0 +1,23 @@
+/* Helper mixins */
+
+@mixin border_radius_top($size) {
+  -webkit-border-top-left-radius: $size;
+  -webkit-border-top-right-radius: $size;
+  -moz-border-radius-topleft: $size;
+  -moz-border-radius-topright: $size;
+  border-top-left-radius: $size;
+  border-top-right-radius: $size;  
+}
+
+@mixin border_radius($size) {
+  border-radius: $size;
+  -moz-border-radius: $size;
+  -webkit-border-radius: $size;
+}
+
+@mixin box_shadow($offset, $radius, $color) {
+  // x-offset y-offset radius color
+  box-shadow: $offset $offset $radius $color;
+  -moz-box-shadow: $offset $offset $radius $color;
+  -webkit-box-shadow: $offset $offset $radius $color;
+}

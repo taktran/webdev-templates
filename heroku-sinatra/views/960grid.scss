@@ -1,0 +1,155 @@
+/*
+	960 grid system in sass
+	
+	Based on 
+	 - http://www.spry-soft.com/grids/
+	 - https://github.com/chriseppstein/compass-960-plugin.git (https://github.com/chriseppstein/compass-960-plugin/blob/master/stylesheets/960/_grid.sass)
+	 	 
+*/
+
+
+/* Variables
+----------------------------------------------------------------------------------------------------*/
+/* Defaults for methods */
+$ninesixty_grid_width: 960px;
+$ninesixty_cols: 12;
+$ninesixty_gutter_margin: 10px; /* One side of the grid */
+
+
+/* Body
+----------------------------------------------------------------------------------------------------*/
+
+/*
+  Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if your layout is wider.
+
+  Note: IE6 works fine without this fix.
+*/
+body {
+  min-width: $ninesixty_grid_width;
+}
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+
+@mixin ninesixty_grid_container {
+	margin-left: auto;
+	margin-right: auto;
+	width: $ninesixty_grid_width;
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+@mixin container_12_grid_defaults($gutter_margin: ninesixty_gutter_margin) {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: $gutter_margin;
+	margin-right: $gutter_margin;
+}
+
+
+
+@mixin push_pull_position {
+	position: relative;
+}
+
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+
+/* Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+@mixin grid($n, $cols: $ninesixty_cols, $gutter_margin: $ninesixty_gutter_margin) {
+  @include container_12_grid_defaults;
+  
+  @if $n > 0 {
+    width: (($ninesixty_grid_width / $cols) * $n) - ($gutter_margin * 2);
+  }
+}
+
+
+/* Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+@mixin grid_preffix($n, $cols: $ninesixty_cols) {
+  padding-left: ($ninesixty-grid-width / $cols) * $n;
+}
+
+
+/* Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+@mixin grid_suffix($n, $cols: $ninesixty_cols) {
+  padding-right: ($ninesixty-grid-width / $cols) * $n;
+}
+
+
+/* Push Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+@mixin grid_push($n, $cols: $ninesixty_cols) {
+  @include push_pull_position;
+  left: ($ninesixty_grid_width / $cols) * $n;
+}
+
+
+/* Pull Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+@mixin grid_pull($n, $cols: $ninesixty_cols) {
+  @include push_pull_position;
+  left: -($ninesixty_grid_width / $cols) * $n;
+}
+
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix {
+  zoom: 1;
+}
